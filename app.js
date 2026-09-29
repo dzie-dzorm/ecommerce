@@ -1,6 +1,7 @@
 const wrapper = document.querySelector(".sliderWrapper");
 const menuItems = document.querySelectorAll(".menuItem");
 
+//All products with their corresponding details
 const products = [
   {
     id: 1,
@@ -89,13 +90,13 @@ const currentProductSizes = document.querySelectorAll(".size");
 
 menuItems.forEach((item, index) => {
   item.addEventListener("click", () => {
-    //change the current slide
+    //change the current slide , NOTE: Normal screen width = 100vw
     wrapper.style.transform = `translateX(${-100 * index}vw)`;
 
     //change the choosen product
     choosenProduct = products[index];
 
-    //change texts of currentProduct
+    //change texts of currentProduct when picked
     currentProductTitle.textContent = choosenProduct.title;
     currentProductPrice.textContent = "$" + choosenProduct.price;
     currentProductImg.src = choosenProduct.colors[0].img;
@@ -106,32 +107,37 @@ menuItems.forEach((item, index) => {
     });
   });
 });
-
+//Adding a click event so the products changes to their corresponding images in color after picking a color
 currentProductColors.forEach((color, index) => {
   color.addEventListener("click", () => {
     currentProductImg.src = choosenProduct.colors[index].img;
   });
 });
-
+//Adding a click event
 currentProductSizes.forEach((size, index) => {
   size.addEventListener("click", () => {
     currentProductSizes.forEach((size) => {
+        //origin background and color
       size.style.backgroundColor = "white";
       size.style.color = "black";
     });
+    //Changes after picking
     size.style.backgroundColor = "black";
     size.style.color = "white";
   });
 });
 
+
+//Assigning  a variable to the queried classes to be used.
 const productButton = document.querySelector(".productButton");
 const payment = document.querySelector(".payment");
 const close = document.querySelector(".close");
 
+//Enable the payment form to display after clicking the buy button
 productButton.addEventListener("click", () => {
   payment.style.display = "flex";
 });
-
+//Adding a click event so the form closes whenever its clicked
 close.addEventListener("click", () => {
   payment.style.display = "none";
 });
